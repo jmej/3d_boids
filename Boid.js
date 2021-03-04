@@ -119,15 +119,11 @@ class Boid {
   show() {
     push();
     translate(this.position.x, this.position.y, this.position.z);
-    let depthAngle = createVector()
     rotateY(Math.atan(this.velocity.y/this.velocity.x));
-    //rotateY(this.velocity.heading());
+    //rotateX(Math.atan(this.velocity.y/this.velocity.x));
+    //rotateY(radians(90));
     rotateZ(this.velocity.heading());
-
-    //rotateX(radians(-90));
-    //rotateY(radians(45));
     rotateZ(radians(-90));
-    //rotate(radians(-90)); //corrects orienation if using built-in cone primative
     strokeWeight(1);
     stroke(252, 3, 227);
     fill(52, 213, 235);
