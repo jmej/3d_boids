@@ -1,12 +1,15 @@
-// much of the flocking logic taken from https://thecodingtrain.com/CodingChallenges/124-flocking-boids.html
+//boids algorithms in 3d
+
+// initial 2D flocking logic taken from https://thecodingtrain.com/CodingChallenges/124-flocking-boids.html
 // https://youtu.be/mhjuuHl6qHM
+
 
 class Boid {
   constructor() {
-    this.position = createVector(random(width), random(height));
-    this.velocity = p5.Vector.random2D();
-    this.velocity.setMag(random(1, 2));
-    this.acceleration = createVector();
+    this.position = createVector(random(width), random(height), random(depth));
+    this.velocity = p5.Vector.random3D(); // velocity starts as a random unit vector
+    this.velocity.setMag(random(-1, 1));
+    this.acceleration = createVector(0, 0, 0);
     this.maxForce = 0.2;
     this.maxSpeed = 5;
   }
@@ -22,14 +25,19 @@ class Boid {
     } else if (this.position.y < 0) {
       this.position.y = height;
     }
+    if (this.position.z > depth) {
+      this.position.z = 0;
+    } else if (this.position.z < 0) {
+      this.position.z = depth;
+    }
   }
 
   align(boids) {
     let perceptionRadius = 25;
-    let steering = createVector();
+    let steering = createVector(0, 0, 0);
     let total = 0;
     for (let other of boids) {
-      let d = dist(this.position.x, this.position.y, other.position.x, other.position.y);
+      let d = dist(this.position.x, this.position.y, this.position.z, other.position.x, other.position.y, other.position.z);
       if (other != this && d < perceptionRadius) {
         steering.add(other.velocity);
         total++;
@@ -46,10 +54,10 @@ class Boid {
 
   separation(boids) {
     let perceptionRadius = 24;
-    let steering = createVector();
+    let steering = createVector(0, 0, 0);
     let total = 0;
     for (let other of boids) {
-      let d = dist(this.position.x, this.position.y, other.position.x, other.position.y);
+      let d = dist(this.position.x, this.position.y, this.position.z, other.position.x, other.position.y, other.position.z);
       if (other != this && d < perceptionRadius) {
         let diff = p5.Vector.sub(this.position, other.position);
         diff.div(d * d);
@@ -68,10 +76,10 @@ class Boid {
 
   cohesion(boids) {
     let perceptionRadius = 50;
-    let steering = createVector();
+    let steering = createVector(0, 0, 0);
     let total = 0;
     for (let other of boids) {
-      let d = dist(this.position.x, this.position.y, other.position.x, other.position.y);
+      let d = dist(this.position.x, this.position.y, this.position.z, other.position.x, other.position.y, other.position.z);
       if (other != this && d < perceptionRadius) {
         steering.add(other.position);
         total++;
@@ -110,9 +118,15 @@ class Boid {
 
   show() {
     push();
-    translate(this.position.x, this.position.y);
-    rotate(this.velocity.heading());
-    rotate(radians(-90)); //corrects orienation if using built-in cone primative
+    translate(this.position.x, this.position.y, this.position.z);
+    rotateX(this.velocity.heading());
+    rotateY(this.velocity.heading());
+    rotateZ(this.velocity.heading());
+
+    rotateX(radians(-90));
+    //rotateY(radians(-90));
+    rotateZ(radians(-90));
+    //rotate(radians(-90)); //corrects orienation if using built-in cone primative
     strokeWeight(1);
     stroke(252, 3, 227);
     fill(52, 213, 235);

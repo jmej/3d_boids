@@ -1,5 +1,6 @@
 
 const flock = [];
+depth = 500; 
 
 let alignSlider, cohesionSlider, separationSlider;
 
