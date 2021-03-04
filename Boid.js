@@ -119,12 +119,12 @@ class Boid {
   show() {
     push();
     translate(this.position.x, this.position.y, this.position.z);
-    rotateX(this.velocity.heading());
-    rotateY(this.velocity.heading());
+    //rotateX(this.velocity.heading());
+    //rotateY(this.velocity.heading());
     rotateZ(this.velocity.heading());
 
-    rotateX(radians(-90));
-    //rotateY(radians(-90));
+    //rotateX(radians(-90));
+    //rotateY(radians(45));
     rotateZ(radians(-90));
     //rotate(radians(-90)); //corrects orienation if using built-in cone primative
     strokeWeight(1);
