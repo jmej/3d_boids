@@ -119,7 +119,8 @@ class Boid {
   show() {
     push();
     translate(this.position.x, this.position.y, this.position.z);
-    //rotateX(this.velocity.heading());
+    let depthAngle = createVector()
+    rotateY(Math.atan(this.velocity.y/this.velocity.x));
     //rotateY(this.velocity.heading());
     rotateZ(this.velocity.heading());
 
