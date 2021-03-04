@@ -112,9 +112,13 @@ class Boid {
     push();
     translate(this.position.x, this.position.y);
     rotate(this.velocity.heading());
-    strokeWeight(6);
-    stroke(255);
-    triangle(0, 0, 10, 5, 10, 20)
+    rotate(radians(-90)); //corrects orienation if using built-in cone primative
+    strokeWeight(1);
+    stroke(252, 3, 227);
+    fill(52, 213, 235);
+
+    //triangle(0, 0, 10, 5, 10, 20)
+    cone(10, 20, 4);
     pop();
   }
 }
