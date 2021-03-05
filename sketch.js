@@ -13,9 +13,9 @@ let centerZ = 0;
 let alignSlider, cohesionSlider, separationSlider;
 let robotoMono;
 
-function preload(){
-  robotoMono = loadFont('RobotoMono-VariableFont_wght.ttf');
-}
+// function preload(){
+//   robotoMono = loadFont('RobotoMono-VariableFont_wght.ttf');
+// }
 
 function setup() {
   createCanvas(1000, 500, WEBGL);
@@ -37,10 +37,10 @@ function setup() {
 
 function draw() {
   background(0);
-  fill(252, 3, 227);
-  stroke(252, 3, 227);
-  textFont(robotoMono);
-  textSize(32);
+  // fill(252, 3, 227);
+  // stroke(252, 3, 227);
+  // textFont(robotoMono);
+  // textSize(32);
   // text("alignment", width/20, height/25, 0);
 
   if (keyIsDown(87)){ //w
