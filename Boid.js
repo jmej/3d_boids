@@ -116,6 +116,15 @@ class Boid {
     this.acceleration.mult(0);
   }
 
+  respawn(){
+    this.position = createVector(random(width), random(height), random(depth));
+    this.velocity = p5.Vector.random3D(); // velocity starts as a random unit vector
+    this.velocity.setMag(random(-1, 1));
+    this.acceleration = createVector(0, 0, 0);
+    this.maxForce = 0.2;
+    this.maxSpeed = 5;
+  }
+
   show() {
     push();
     translate(this.position.x, this.position.y, this.position.z);
