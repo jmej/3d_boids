@@ -119,10 +119,17 @@ class Boid {
   show() {
     push();
     translate(this.position.x, this.position.y, this.position.z);
-    rotateY(Math.atan(this.velocity.y/this.velocity.x));
+    let rho = this.velocity.mag();
+    let phi = Math.asin(this.velocity.z / rho);
+    let theta = this.velocity.heading();
+
+    rotateY(phi);
+    rotateZ(theta);
+    //rotateY(atan2(this.velocity.x, this.velocity.z) + HALF_PI);
     //rotateX(Math.atan(this.velocity.y/this.velocity.x));
     //rotateY(radians(90));
-    rotateZ(this.velocity.heading());
+    //rotateZ(this.velocity.heading());
+    //rotateZ(Math.acos(this.velocity.z/this.velocity.magnitude));
     rotateZ(radians(-90));
     strokeWeight(1);
     stroke(252, 3, 227);
